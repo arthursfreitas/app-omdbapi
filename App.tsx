@@ -1,21 +1,33 @@
 import { StatusBar } from 'expo-status-bar';
+import { AppLoading } from 'expo'
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import AppNavigation from './src/routes/AppNavigation';
+import {
+  Montserrat_300Light,
+  Montserrat_400Regular,
+  Montserrat_700Bold,
+  useFonts
 
-export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
+} from '@expo-google-fonts/montserrat';
+
+console.disableYellowBox = true;
+
+const App: React.FC = () => {
+  let [fontsLoaded] = useFonts({
+    Montserrat_300Light,
+    Montserrat_400Regular,
+    Montserrat_700Bold
+  });
+  if (!fontsLoaded) {
+    return <AppLoading />;
+  } else {
+    return (
+      <>
+        <AppNavigation />
+        <StatusBar style="light" />
+      </>
+    );
+  }
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+export default App;
